@@ -21,13 +21,13 @@ function App() {
   }
   return (
     <main>
-      <h1>$400<span>.00</span></h1>
+      <h1>$200<span>.00</span></h1>
       <form onSubmit={addNewTransaction}>
         <div className='basic'>
           <input type="text" 
                  value={name}
                  onChange={ev => setName(ev.target.value)}
-                 placeholder={'+200 new samsung tv'}></input>
+                 placeholder={'+200 new phone'}></input>
           <input value={datetime}
                  onChange={ev => setDatetime(ev.target.value)}
                  type="datetime-local"></input>
@@ -43,32 +43,32 @@ function App() {
       <div className='transactions'>
         <div className='transaction'>
           <div className='left'>
-            <div className='name'>New Samsung TV</div>
-            <div className='description'>It was time for new TV</div>
+            <div className='name'>Samsung phone</div>
+            <div className='description'>A new phone</div>
           </div>
           <div className='right'>
-            <div className='price red'>-$500</div>
-            <div className='datetime'>22-12-18 15:45</div>
+            <div className='price red'>-$600</div>
+            <div className='datetime'>09-01-25 06:40</div>
           </div>
         </div>
         <div className='transaction'>
           <div className='left'>
-            <div className='name'>Gig job new websites</div>
-            <div className='description'>It was time for new TV</div>
+            <div className='name'>new laptop</div>
+            <div className='description'>A new computer</div>
           </div>
           <div className='right'>
-            <div className='price green'>+$500</div>
-            <div className='datetime'>22-12-18 15:45</div>
+            <div className='price green'>+$800</div>
+            <div className='datetime'>09-01-25 06:45</div>
           </div>
         </div>
         <div className='transaction'>
           <div className='left'>
-            <div className='name'>Iphone</div>
-            <div className='description'>It was time for new TV</div>
+            <div className='name'>Guitar</div>
+            <div className='description'>A new Hobby</div>
           </div>
           <div className='right'>
             <div className='price red'>-$900</div>
-            <div className='datetime'>22-12-18 15:45</div>
+            <div className='datetime'>09-01-25 06:47</div>
           </div>
         </div>
       </div>

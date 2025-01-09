@@ -1,26 +1,61 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+const Transaction = require("./models/Transaction.js");
+const { default: mongoose } = require("mongoose");
 const app = express();
+
+const url = "/api/test";
 const port = 5040;
+const message = "test ok";
 
-// Middleware to handle CORS
 app.use(cors());
-
-// Middleware to parse JSON request bodies
 app.use(express.json());
 
-// Test GET endpoint
-app.get('/api/test', (req, res) => {
-  res.json({ body: 'test ok' });
+app.get(url, (req, res) => {
+  res.json(message);
 });
 
-// POST endpoint for transactions
-app.post('/api/transaction', (req, res) => {
-  console.log('Received transaction:', req.body); // Log the incoming data
-  res.json({ message: 'Transaction received', data: req.body });
+app.post("/api/transaction", async (req, res) => {
+  try {
+    console.log("Connecting to MongoDB database...");
+    await mongoose.connect(process.env.MONGO_URL);
+
+    console.log("MongoDB database connected successfully!");
+
+    // Check if all required fields are present in the request body
+    if (
+      !req.body.name ||
+      !req.body.description ||
+      !req.body.datetime ||
+      !req.body.price
+    ) {
+      res.status(400).send("Missing required fields");
+      return;
+    }
+
+    // Create a new transaction with the data from the request body
+    const { name, description, datetime, price } = req.body;
+    const transaction = await Transaction.create({
+      name,
+      description,
+      datetime,
+      price,
+    });
+
+    res.json(transaction);
+  } catch (error) {
+    console.error("Error connecting to MongoDB database:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.get("/api/transaction", async (req, res) => {
+  await mongoose.connect(process.env.MONGO_URL);
+  const transactions = await Transaction.find();
+  res.json(transactions);
 });
+
+// Static Port
+app.listen(port);
+console.log(`App listening on port http://localhost:${port}${url}`);

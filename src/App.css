@@ -16,8 +16,14 @@ h1 {
   text-align: center;
   color: #fff;
   margin: 0;
+  font-size: 2.5rem;
 }
-
+h1 span{
+  font-size: .5rem;
+  vertical-align: top;
+  display: inline-block;
+  margin-top: 6px;
+}
 form {
   margin-top: 20px;
 }
@@ -41,13 +47,6 @@ form div.basic {
   margin-bottom: 5px
 }
 
-/*to fix the problem that i have, descreption take a space ex: 100% 
-while classname basic that has two element take only 95% so to make 
-this two element have 100% A+B I will add something in top to 
-make program understand how to calculate it   {
-  box-sizing: border-box;
-}*/
-
 form button {
   width: 100%;
   margin-top: 5px;
@@ -68,7 +67,7 @@ div.transaction {
   border-top: 1px solid #30313d;
 }
 
-div.transaction: :first-child {
+div.transaction:first-child {
   border-top: 0;
 }
 
